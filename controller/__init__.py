@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, Blueprint
 
-app = Flask("__name__")
-#app.config['APPLICATION_ROOT'] = '/api'
+api = Blueprint("api", "api", url_prefix="/api")
 
 from .user import *
+
+app = Flask("__name__")
+app.register_blueprint(api)
