@@ -1,7 +1,12 @@
-from controller import api
+from controller import api, session
+from database.model import User
 
 @api.route("/user")
 def get_users():
+    #users = session.query(User).all()
+    ##print(users)
+    #print(users[0])
+    #print("hello")
     return "Get all users"
 
 @api.route("/user", methods=["POST"])
