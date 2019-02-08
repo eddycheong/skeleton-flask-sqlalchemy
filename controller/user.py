@@ -21,11 +21,10 @@ def create_user():
     new_user = User(name=data["name"])
     session.add(new_user)
     session.commit()
-    session.refresh(new_user)
     
     result = user_schema.dump(new_user)
 
-    return jsonify(result)
+    return jsonify(result[0])
 
 @api.route("/user/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
