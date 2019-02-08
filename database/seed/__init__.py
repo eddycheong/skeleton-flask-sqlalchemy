@@ -1,1 +1,1 @@
-from .seed import seeding
+from .seeder import Seeder
