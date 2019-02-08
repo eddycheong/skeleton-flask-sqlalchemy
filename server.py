@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-
-from flask import Flask
-
 from database import Base, Session, Engine
-from database.seed import Seeder 
+from database.seed import Seeder
+from controller import app
 
 # Creates all of the tables
 Base.metadata.create_all(Engine)
@@ -11,11 +9,9 @@ Base.metadata.create_all(Engine)
 seeder = Seeder()
 seeder.seed()
 
-app = Flask("__name__")
-
-@app.route("/")
-def index():
-    return "Hello World "
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="localhost",
+        port="5000",
+        debug=True
+    )
