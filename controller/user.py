@@ -42,4 +42,8 @@ def update_user(user_id):
 
 @api.route("/user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
-    return f"Deleting user {user_id}"
+    existing_user = session.query(User).filter(User.id == user_id).one()
+    session.delete(existing_user)
+    session.commit()
+
+    return ""
