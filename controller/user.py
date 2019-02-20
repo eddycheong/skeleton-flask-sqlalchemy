@@ -28,7 +28,17 @@ def create_user():
 
 @api.route("/user/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
-    return f"Update user {user_id}"
+    user_schema = user.UserSchema(strict=True, many=False)
+    existing_user = session.query(User).filter(User.id == user_id)
+    
+    user_data = request.get_json()
+    print(user_data)
+    existing_user.update({"name": user_data["name"]})
+    session.commit()
+
+    result = result = user_schema.dump(existing_user)
+
+    return jsonify(result[0])
 
 @api.route("/user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
