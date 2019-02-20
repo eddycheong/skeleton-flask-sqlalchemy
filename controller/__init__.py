@@ -2,6 +2,7 @@ from database import Session
 from flask import Flask, Blueprint
 
 session = Session()
+
 api = Blueprint("api", "api", url_prefix="/api")
 
 from .user import *
