@@ -105,6 +105,3 @@ venv.bak/
 
 # Databases
 *.db
-
-# Configs
-config.json

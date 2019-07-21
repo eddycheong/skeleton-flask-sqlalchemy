@@ -8,5 +8,6 @@ class Seeder():
         self._session = Session()
 
     def seed(self):
-        self._session.add(User(name="seed_user"))
+        self._session.add(User(name="seed_user_1"))
+        self._session.add(User(name="seed_user_2"))
         self._session.commit()
