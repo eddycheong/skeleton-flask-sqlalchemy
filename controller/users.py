@@ -11,6 +11,16 @@ def get_users():
 
     users = session.query(User).all()
     results = users_schema.dump(users)
+    print(results)
+    return jsonify(results)
+
+@api.route(f"/{controller_name}/<int:user_id>")
+def get_user(user_id):
+    users_schema = user.UserSchema(strict=True, many=True)
+
+    existing_user = session.query(User).filter(User.id == user_id)
+    results = users_schema.dump(existing_user)
+    print(results)
     return jsonify(results)
 
 @api.route(f"/{controller_name}", methods=["POST"])
@@ -44,7 +54,7 @@ def update_user(user_id):
 
 @api.route(f"/{controller_name}/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
-    existing_user = session.query(User).filter(User.id == user_id).one()
+    existing_user = session.query(User).filter(User.id == user_id)
     session.delete(existing_user)
     session.commit()
 
