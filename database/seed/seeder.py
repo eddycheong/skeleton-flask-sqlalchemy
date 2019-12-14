@@ -2,12 +2,16 @@
 
 from database import Session
 from database.model import User
+from database.seed.users import seed_users
 
 class Seeder():
     def __init__(self):
         self._session = Session()
 
+    def _add_seed_data(self, entities):
+        for entity in entities:
+            self._session.add(entity)
+
     def seed(self):
-        self._session.add(User(name="seed_user_1"))
-        self._session.add(User(name="seed_user_2"))
+        self._add_seed_data(seed_users())
         self._session.commit()
