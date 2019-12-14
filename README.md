@@ -3,7 +3,7 @@
 ## Creating Migrations Files
 1. Add the new model under models
 2. Update the __init__.py under models to include your new model
-3. Run the following command: `alembic revision -m "Create table x" --autogenerate`
+3. Run the following command: `alembic revision -m "create table x" --autogenerate`
 4. Cleanup the migration file
 
 ## Running Migrations

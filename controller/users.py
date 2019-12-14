@@ -3,7 +3,9 @@ from controller import api, session
 from database.model import User
 from database.schema import user
 
-@api.route("/user")
+controller_name = "users"
+
+@api.route(f"/{controller_name}")
 def get_users():
     users_schema = user.UserSchema(strict=True, many=True)
 
@@ -11,7 +13,7 @@ def get_users():
     results = users_schema.dump(users)
     return jsonify(results)
 
-@api.route("/user", methods=["POST"])
+@api.route(f"/{controller_name}", methods=["POST"])
 def create_user():
     user_schema = user.UserSchema(strict=True, many=False)
     user_data = request.get_json()
@@ -26,7 +28,7 @@ def create_user():
 
     return jsonify(result[0])
 
-@api.route("/user/<int:user_id>", methods=["PUT"])
+@api.route(f"/{controller_name}/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
     user_schema = user.UserSchema(strict=True, many=False)
     existing_user = session.query(User).filter(User.id == user_id)
@@ -40,7 +42,7 @@ def update_user(user_id):
 
     return jsonify(result[0])
 
-@api.route("/user/<int:user_id>", methods=["DELETE"])
+@api.route(f"/{controller_name}/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
     existing_user = session.query(User).filter(User.id == user_id).one()
     session.delete(existing_user)
